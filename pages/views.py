@@ -49,7 +49,7 @@ def contact(request):
         message_body = 'Your name is - ' + name + ', email - ' + email + ', phone - ' + phone + ', message - ' + message + "\nThank you for contacting with us. We will get you soon."
 
         admin_info = User.objects.get(is_superuser=True)
-        admin_email = admin_info.email
+        admin_email = email
         send_mail(
                 email_subject,
                 message_body,

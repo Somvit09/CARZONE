@@ -40,7 +40,7 @@ def inquiry(request):
                           message=message)
 
         admin_info = User.objects.get(is_superuser=True)
-        admin_email = admin_info.email
+        admin_email = email
         send_mail(
                 'New Car Inquiry',
                 'You have just make a new inquiry for the ' + car_title + '.' +
