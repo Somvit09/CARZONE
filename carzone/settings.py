@@ -16,6 +16,9 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# pip install python-decouple
+from decouple import config
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -23,14 +26,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from django.core.management.utils import get_random_secret_key
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_random_secret_key()
+SECRET_KEY = config('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'carzone-main-sam.herokuapp.com', ]
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Application definition
 
@@ -105,11 +109,11 @@ WSGI_APPLICATION = 'carzone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbl8m76501oe6n',
-        'USER': 'wrjtwwprlnuivh',
-        'PASSWORD': '129eaec19f1b477ba334d5a07745c0a9919fd6cfedcba5465cc0d1f742b96855',
-        'HOST': 'ec2-52-45-83-163.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': config("HEROKU_DB_NAME"),
+        'USER': config("HEROKU_DB_USER"),
+        'PASSWORD': config("HEROKU_DB_PASSWORD"),
+        'HOST': config("HEROKU_DB_HOST"),
+        'PORT': config("HEROKU_DB_PORT"),
     }
 }
 
@@ -170,10 +174,10 @@ SITE_ID = 1
 
 
 # Email sending
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'demo.mail.user09@gmail.com'
-EMAIL_HOST_PASSWORD = 'ckwqnbgyhzfepcmq'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 
 
