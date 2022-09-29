@@ -172,8 +172,8 @@ SITE_ID = 1
 # Email sending
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'demo.mail.userforinquiry@gmail.com'
-EMAIL_HOST_PASSWORD = 'rfqqsyqxqyoyhwhx'
+EMAIL_HOST_USER = 'demo.mail.user09@gmail.com'
+EMAIL_HOST_PASSWORD = 'ckwqnbgyhzfepcmq'
 EMAIL_USE_TLS = True
 
 
