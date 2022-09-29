@@ -45,15 +45,15 @@ def contact(request):
         phone = request.POST['phone']
         message = request.POST['message']
 
-        email_subject = 'You have a new message from Carzone website regarding ' + subject
-        message_body = 'Your name is - ' + name + ', email - ' + email + ', phone - ' + phone + ', message - ' + message + "\nThank you for contacting with us. We will get you soon."
+        email_subject = 'You have a new message from Carzone regarding ' + subject
+        message_body = f"Thank You {name} for making query about {message}. We will get back with you soon."
 
         admin_info = User.objects.get(is_superuser=True)
         admin_email = email
         send_mail(
                 email_subject,
                 message_body,
-                'demo.mail.userforinquiry@gmail.com',
+                'demo.mail.user09@gmail.com',
                 [admin_email, ],
                 fail_silently=False,
             )
