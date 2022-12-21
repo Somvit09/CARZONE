@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
+import social_core.backends.google
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -59,6 +60,7 @@ INSTALLED_APPS = [
     # Providers
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'carzone.urls'
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 TEMPLATES = [
     {
@@ -101,19 +108,27 @@ WSGI_APPLICATION = 'carzone.wsgi.application'
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'carzone_db',
 #         'USER': 'postgres',
-#         'PASSWORD': '######',
+#         'PASSWORD': '1234',
 #         'HOST': 'localhost',
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config("HEROKU_DB_NAME"),
+#         'USER': config("HEROKU_DB_USER"),
+#         'PASSWORD': config("HEROKU_DB_PASSWORD"),
+#         'HOST': config("HEROKU_DB_HOST"),
+#         'PORT': config("HEROKU_DB_PORT"),
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config("HEROKU_DB_NAME"),
-        'USER': config("HEROKU_DB_USER"),
-        'PASSWORD': config("HEROKU_DB_PASSWORD"),
-        'HOST': config("HEROKU_DB_HOST"),
-        'PORT': config("HEROKU_DB_PORT"),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'carzone.sqlite3',
     }
 }
 
@@ -184,6 +199,13 @@ EMAIL_USE_TLS = True
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
+
+SOCIAL_AUTH_GOOGLE_OAUTH_KEY = config('SOCIAL_AUTH_GOOGLE_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = config('SOCIAL_AUTH_GOOGLE_SECRET')
 
 # Whitenoise settings
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
